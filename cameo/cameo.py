@@ -29,7 +29,6 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
 import cv2
 from managers import PygameWindowManager as WindowManager, CaptureManager
 
@@ -42,15 +41,11 @@ class Cameo(object):
         )
 
     def run(self):
-        """
-        Run the main loop.
-
-        运行主循环。
-        """
+        """Run the main loop."""
         self._windowManager.createWindow()
         while self._windowManager.isWindowCreated:
             self._captureManager.enterFrame()
-            frame: cv2.typing.MatLike = self._captureManager.frame
+            frame = self._captureManager.frame
 
             if frame is not None:
                 # TODO: Filter the frame (Chapter 3).
@@ -60,17 +55,12 @@ class Cameo(object):
             self._windowManager.processEvents()
 
     def onKeypress(self, keycode):
-        """
-        Handle a keypress.
+        """Handle a keypress.
 
-        Keycode values:\n
-            space  -> Take a screenshot.\n
-            tab    -> Start/stop recording a screencast.\n
-            escape -> Quit.
+        space  -> Take a screenshot.
+        tab    -> Start/stop recording a screencast.
+        escape -> Quit.
 
-        处理按键事件
-        通过传递这个回调函数，我们可以在按下键盘时执行一些操作
-        回调函数让我们能够自定义按键的功能
         """
         if keycode == 32:  # space
             self._captureManager.writeImage("screenshot.png")

@@ -35,11 +35,7 @@ import scipy.interpolate
 
 
 def createFlatView(array):
-    """
-    Return a 1D view of an array of any dimensionality.
-    
-    返回任意维度数组的1D视图。 
-    """
+    """Return a 1D view of an array of any dimensionality."""
     flatView = array.view()
     flatView.shape = array.size
     return flatView
@@ -49,8 +45,7 @@ def createLookupArray(func, length=256):
     """Return a lookup for whole-number inputs to a function.
 
     The lookup values are clamped to [0, length - 1].
-    
-    createLookupArray 函数用于生成一个查找数组，该数组将整数输入映射到一个函数的输出。函数的默认长度为 256，但可以通过参数进行调整。查找数组中的值被限制在 [0, length - 1] 范围内。
+
     """
     if func is None:
         return None
