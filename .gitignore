@@ -1,4 +1,5 @@
 # Custom .gitignore
+*.mp4
 .history/
 *.avi
 *.png
