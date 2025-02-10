@@ -1,6 +1,7 @@
 import cv2
 from window_manager import WindowManager
 from capture_manager import CaptureManager
+import filter
 
 
 class MyCameo(object):
@@ -13,16 +14,15 @@ class MyCameo(object):
         )
 
     def run(self):
-        """
-        Run the main loop.
-        """
+        """Run the main loop."""
         self._windowManager.createWindow()
         while self._windowManager.isWindowCreated:
             self._captureManager.enterFrame()
-            frame: cv2.typing.MatLike = self._captureManager.frame
+            frame = self._captureManager.frame
 
             if frame is not None:
-                # TODO: Filter the frame
+                # TODO: Filter the frame (Chapter 3).
+                filter.strokeEdges(frame, frame)
                 pass
 
             self._captureManager.exitFrame()
@@ -60,6 +60,7 @@ class MyCameo(object):
             frame: cv2.typing.MatLike = self._captureManager.frame
 
             if frame is not None:
+                # 切割和分辨率
                 self._captureManager.cropFrame(0, 0, 1920, 1080)
                 self._captureManager.adjustVideoResolution(640, 512)
                 pass
@@ -69,5 +70,5 @@ class MyCameo(object):
 
 
 if __name__ == "__main__":
-    # MyCameo().run()
-    MyCameo().preprocess(r"raw_video\output_rgb.mp4")
+    MyCameo().run()
+    # MyCameo().preprocess(r"raw_video\output_rgb.mp4")

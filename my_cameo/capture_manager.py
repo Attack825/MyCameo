@@ -83,10 +83,12 @@ class CaptureManager(object):
         )
 
         if self._capture is not None:
-            if self._framesElapsed % self.insertInterval == 0:
+            if (self._framesElapsed + 1) % self.insertInterval == 0:
                 self._enteredFrame = True  # 置为True，但是并没有移动指针
             else:
-                self._enteredFrame = self._capture.grab()
+                self._enteredFrame = (
+                    self._capture.grab()
+                )  # 通过grab()移动指针，然后使用retrieve()获取帧
 
     def exitFrame(self):
         """
